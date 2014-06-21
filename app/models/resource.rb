@@ -1,4 +1,5 @@
 class Resource < ActiveRecord::Base
+  belongs_to :article
 	attr_accessible :filename, :position, :content_type, :file, :tags_attributes, :thumbnail, :description, :url
 
 	mount_uploader :file, FileUploader

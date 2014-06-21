@@ -1,0 +1,20 @@
+
+<div id="article_<%= article.id %>" class="row article-archive">
+  <div class="span12">
+    <div class="span3">
+      <a href="<%= article.resource.file %>" target="_blank">
+        <img src="<%= article.resource.thumbnail %>">
+      </a>
+    </div>
+    <div class="span8 admin-articles-text-align">
+      <%= article.resource.description %><br/> <a class="articulo" style="text-width: bold" href="<%= article.resource.file %>" target="_blank"> [Ver Articulo]</a>
+    </div>
+  </div>
+  <div class="span12">
+
+    <%= link_to "Elminar", admin_article_path(article), remote: true, method: :delete, data: { confirm: "Estas seguro de querer eliminar el articulo?" } %>
+    - <%= link_to "#{article.published ? 'Quitar Publicación' : 'Publicar'}", admin_publish_article_path(article),class: "publish_#{article.id}", remote: true, method: :put %>
+    - <%= link_to "#{article.active ? 'No Mostrar' : 'Mostrar'}", admin_active_article_path(article),class: "active_#{article.id}", remote: true, method: :put %>
+    - <%= link_to "Modificar", edit_admin_article_path(article) %>
+  </div>
+</div>

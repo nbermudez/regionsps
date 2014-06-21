@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140129152338) do
+ActiveRecord::Schema.define(:version => 20140611172702) do
+
+  create_table "articles", :force => true do |t|
+    t.boolean  "active"
+    t.boolean  "published"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -51,12 +58,12 @@ ActiveRecord::Schema.define(:version => 20140129152338) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
+    t.text     "description"
     t.string   "place"
     t.datetime "celebrated_at"
-    t.boolean  "is_public"
-    t.text     "description"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "is_public"
     t.string   "invited_group"
   end
 
@@ -127,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20140129152338) do
     t.text     "description"
     t.string   "url"
     t.integer  "position"
+    t.integer  "article_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -221,10 +229,11 @@ ActiveRecord::Schema.define(:version => 20140129152338) do
     t.string   "last_name"
     t.string   "encrypted_password"
     t.string   "salt"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "phone"
     t.integer  "chapel_id"
+    t.string   "password_reset_code", :limit => 40
   end
 
   add_index "users", ["chapel_id"], :name => "index_users_on_chapel_id"

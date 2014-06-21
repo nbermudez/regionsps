@@ -34,21 +34,30 @@
                                 <li>
                                     <a href="recursos"><i class="icon-folder-open"></i><br />Recursos</a>
                                 </li>
-                                
+
                                 <% unless current_user.nil? %>
-                                <li>
-                                    <a href="events"><i class="icon-calendar"></i><br />Eventos</a>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="#"><i class="icon-calendar"></i><br />Eventos<b class="caret"></b></a>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="events" tabindex="-1">Actividades de la Region</a></li>
+                                        <li><a href="trips" tabindex="-1">Viajes al Templo</a></li>
+                                      </ul>
                                 </li>
+
                                 <li>
                                     <a href="/dashboard"><i class="icon-inbox"></i><br />Dashboard</a>
                                 </li>
                                 <% end %>                                
                                 <li>
                                     <a href="nosotros"><i class="icon-fire"></i><br />Nosotros</a>
-                                </li>                                
-                                <li>
-                                    <a href="admin"><i class="icon-signin"></i><br />Administrar</a>
                                 </li>
+
+                              <li class="dropdown">
+                                <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="admin"><i class="icon-signin"></i><br />Administrar<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                  <li><%= link_to 'Logout', signout_path,:tabindex=>"-1", :method => :delete %></li>
+                                </ul>
+                              </li>
                             </ul>
                         </div>
                     </div>
@@ -62,77 +71,23 @@
                 <div class="span10 offset1">
                     <div class="flexslider">
                         <ul class="slides">
-                            <li data-thumb="assets/galery/preparing-future-missionaries-Lvl1.jpg">
-                                <a href="/articulos/articulo1.pdf" target="_blank">
-                                    <img src="assets/galery/preparing-future-missionaries-Lvl1.jpg">
-                                </a>
-                                <p class="flex-caption">Mejorando la enseñanza del Evangelio en nuestros hogares y reuniones de la Iglesia a traves del uso de "Ven, sigueme".<a class="articulo" style="text-width: bold" href="/articulos/articulo1.pdf" target="_blank"> [Ver Articulo]</a></p>
-                            </li>
-                            <li data-thumb="assets/galery/priesthood-and-priesthood-keys-lvl-1.jpg">
-                                <a href="/articulos/articulo2.pdf" target="_blank">
-                                    <img src="assets/galery/priesthood-and-priesthood-keys-lvl-1.jpg">
-                                </a>
-                                <p class="flex-caption ca-button">Usando el Plan del Área como nuestra guia y visión de como lograr "Crecimiento Verdadero" en nuestras familias y unidades.<a class="articulo" style="text-width: bold" href="/articulos/articulo2.pdf" target="_blank"> [Ver Articulo]</a></p>
-                            </li>
-                            <li data-thumb="assets/galery/outside-temple.jpg">
-                                <a href="/articulos/articulo3.pdf" target="_blank">
-                                    <img src="assets/galery/outside-temple.jpg">
-                                </a>
-                                <p class="flex-caption">Buscando un equilibrio en nuestro liderazgo al "alinear las llaves del Sacerdocio" en nuestras unidades y en nuestro hogar.<a  class="articulo" style="text-width: bold" href="/articulos/articulo3.pdf" target="_blank"> [Ver Articulo]</a></p>
-                            </li>
-                            <li data-thumb="assets/galery/family.jpg">
-                                <a href="/articulos/articulo4.pdf" target="_inline">
-                                    <img src="assets/galery/family.jpg">
-                                </a>
-                                <p class="flex-caption">Fortaleciendo los matrimonios y las familias mediante el abandono de tradiciones falsas y el establecimiento de tradiciones celestiales.<a class="articulo" style="text-width: bold" href="/articulos/articulo4.pdf" target="_blank"><br/>[Ver Articulo]</a></p>
-                            </li>
-                            <li data-thumb="assets/galery/thanks-be-to-god.jpg">
-                                <a href="/articulos/articulo5.pdf" target="_blank">
-                                    <img src="assets/galery/thanks-be-to-god.jpg">
-                                </a>
-                                <p class="flex-caption">Fomentando la búsqueda y el uso de la inspiración por parte de nuestros lideres y familias a traves del uso de "consejos".<a class="articulo" style="text-width: bold" href="/articulos/articulo5.pdf" target="_blank"> [Ver Articulo]</a></p>
-                            </li>
+
+                          <%= render partial: 'home/article', collection: @articles %>
+
                         </ul>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-    <div class="testimonials container">
-        <div class="testimonials-title">
-            <h3 style="width: 27%;">Actividades y Reuniones</h3>
-        </div>
-        <div class="row">
-            <div class="testimonial-list">
-                <% if @events.any? %>
-                <div class="tabbable tabs-below">
-                    <div class="tab-content">
-                        <% @events.each_with_index do |e, i|%>
-                        <div class="tab-pane <% if i == 0 %>active<%end %>" id="<%= e.id %>">                            
-                            <p style="padding-left: 10%">
-                                <strong><%= e.name %></strong>
-                                <br/>
-                                <%= e.description %>
-                                <br />
-                                <span class="violet">Lugar: </span><%= e.place %>
-                                <br />
-                                <span class="violet">Fecha y hora: </span><%= l e.celebrated_at, :format => :long %>
-                            </p>
-                        </div>
-                        <% end %>                  
-                    </div>
 
-                   <ul class="nav nav-tabs" style="width: 20%">
-                    <% @events.each_with_index do |e, i| %>
-                    <li class="<% if i == 0 %>active<% end %>"><a href="#<%= e.id%>" data-toggle="tab"></a></li>
-                    <% end %>
-                   </ul>
-               </div>
-               <% else %>
-                    <h4 style="margin-left: 41%;">No hay actividades próximas.</h4>
-               <% end %>
-            </div>
-        </div>
+
+
+    <div class="testimonials container">
+      <div class="testimonials-title">
+        <h3 style="width: 27%;"><%= link_to 'Articulos anteriores...', articles_path %><br><br></h3>
+      </div>
     </div>
 
     <footer>

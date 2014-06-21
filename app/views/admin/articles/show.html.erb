@@ -1,0 +1,105 @@
+<script type="text/javascript">
+var var_control = 1, nuevo = 0;
+function show_new_tag(){ 
+	$('input[type="hidden"]').filter("[name='new_tag']").each (function() {  this.value = '' });
+	$('div[id="taggear_div"]').each (function() {  this.style['display'] = 'none' });
+	$('a[id="edit_a"]').each (function() {  this.style['display'] = 'none' });
+	$('div[id="new_tag_div"]').each (function() {  this.style['display'] = 'block' });
+	nuevo = 1;
+}
+function hide_new_tag(){ 
+	$('div[id="new_tag_div"]').each (function() {  this.style['display'] = 'none' });
+	$('div[id="taggear_div"]').each (function() {  this.style['display'] = 'block' });
+	$('input[type="text"]').filter("[name='new_tag']").each (function() {  this.value = '' });
+	$('a[id="edit_a"]').each (function() {  this.style['display'] = 'inline' });	
+	nuevo = 0;
+}
+function display_edit(){ 
+	if (var_control == 1 && nuevo == 0){
+		$('div[id="edit_tag_div"]').each (function() {  this.style['display'] = 'block' });
+		$('div[id="taggear_div"]').each (function() {  this.style['display'] = 'none' });
+		var_control = 2;
+	}else{
+		$('div[id="edit_tag_div"]').each (function() {  this.style['display'] = 'none' });
+		$('div[id="taggear_div"]').each (function() {  this.style['display'] = 'block' });
+		var_control = 1;
+	}
+}
+</script>
+
+<div class="page-title">
+    <div class="row">
+    	<div class="contact-form span3"></div>        
+        <div class=" contact-us contact-form login-form span7">	
+			<h3 style="margin: auto; padding-left: 3%">
+				<%= @resource.filename%>
+			</h3>
+			<p>Descripción: <%= @resource.description%></p>
+			<% if @resource.tags.any? %>
+			<table id="hor-minimalist-b">
+				<thead>
+					<tr>
+						<th scope="col">Tópicos</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @resource.tags.each do |u| %>
+					<tr>
+						<td><%= u.title %></td>
+						<td>
+							<% if puede("Eliminar Tag") %>
+							<%= link_to (image_tag('file_delete.png', :size =>'15x15')), admin_resource_tag_path(@resource, u), :method => :delete, :data => { :confirm => '¿Esta seguro?' }%>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+				</tbody>
+			</table>
+			<% end %>
+			<hr>
+			<%= form_tag({:action => 'add_tag', :controller => 'admin/resources'}) do |f| %>
+				<div class="name">
+					<%= label_tag :tag_id, "Tópico" %>
+					<%= select_tag :tag_id, options_for_select(@tags_available.push(["Nuevo tópico", -1])),
+					{:onChange => "if(this.value == -1) show_new_tag();else hide_new_tag();"} %>
+					<% if puede("Modificar Tag") %>
+					<a style="display: <% if @tags_available.size > 1 %>inline<% else %>none<% end %> " id="edit_a" href="" onclick="display_edit();return false;">
+						<%= image_tag('file_edit.png', :size => '25x25', :style => 'vertical-align: top;') %> 
+					</a>
+					<% end %>
+					<br/>
+					<div id="edit_tag_div" style="display:none">
+						<input id="edit_tag" type="text" placeholder="Cambiar tópico por..." name="edit_tag"></input>
+						<button id="edit_btn" type="submit" name="edit">Cambiar tópico</button>
+					</div>				
+					<div id="taggear_div" style="display:<% if @tags_available.size > 1 %>block<% else %>none<% end %>">
+						<button type="submit" name="create">Agregar tópico</button>
+					</div>
+				</div>
+			<% end %>
+			<div id="new_tag_div" style="display: <% if @tags_available.size > 1 %>none<% else %>block<% end %>">
+				<%= form_tag({:action => 'new_tag', :controller => 'admin/resources'}) do |f|%>
+					<input id="new_tag" type="text" placeholder="Nuevo tópico" name="new_tag"></input>
+					<button type="submit" name="create">Crear tópico</button>
+				<% end %>
+			</div>
+			<br/>
+		</div>
+	</div>
+</div>
+<div class="call-to-action-text ">
+	<div class="ca-button">
+	    <a href="<%= admin_resources_path %>">Atrás</a>
+	</div>
+	<% if puede "Ver Recurso" %>
+	<div class="ca-button">
+	    <a href="<%= @resource.file_url %>" target="_blank">Descargar recurso</a>
+	</div>
+	<% end %>
+	<% if puede "Modificar Recurso" %>
+	<div class="ca-button">
+	    <a href="<%= edit_admin_resource_path(@resource) %>" target="_blank">Modificar recurso</a>
+	</div>
+	<% end %>
+</div>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  resource: 
+  active: false
+  published: false
+
+two:
+  resource: 
+  active: false
+  published: false

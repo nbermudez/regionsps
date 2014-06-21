@@ -1,4 +1,4 @@
 class Chapel < ActiveRecord::Base
   belongs_to :stake
-  attr_accessible :address, :name, :phone
+  attr_accessible :stake_id, :address, :name, :phone
 end

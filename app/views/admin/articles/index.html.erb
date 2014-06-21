@@ -1,0 +1,27 @@
+<div class="page-title">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <i class="icon-folder-open page-title-icon"></i>
+        <h2>Articulos</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <%= render partial: 'article', collection: @articles %>
+
+  <%= will_paginate @articles %>
+</div>
+
+
+<div class="call-to-action-text ">
+
+  <% if puede "Crear Articulo" %>
+      <div class="ca-button">
+        <a href="<%= new_admin_article_path %>">Nuevo articulo</a>
+      </div>
+  <% end %>
+</div>

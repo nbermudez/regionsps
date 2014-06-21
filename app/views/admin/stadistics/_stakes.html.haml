@@ -1,7 +1,7 @@
 .row
 	.contact-form.span3
 	.contact-us.login-form.span7
-		- @chapels = Chapel.where("stake_id = ?", @stake.id)
+		- @chapels = @stake.chapels
 		.call-to-action-text
 			.ca-button
 				- @chapels.each do |ch|
@@ -21,7 +21,7 @@
 						- @stadistics.each do |s|
 							= form_for(s, url: admin_stadistic_path(s), remote: true) do |f|
 								%tr
-									%td= Typestadistic.find(s.typestadistic_id).name
+									%td= s.typestadistic.name
 									%td= f.text_field :total, :url=>{:action => :update}, :frequency => 0.05, :update=>s, :with => :total
 
 									- collectStad = Stadistic.where("typestadistic_id = ? and month <= ? and year = ? and chapel_id = ?", s.typestadistic_id, @month, @year, @chapel)

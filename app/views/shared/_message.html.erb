@@ -1,0 +1,7 @@
+<%  flash.each do |name, msg| %>
+    <div data-alert class="alert-box <%= name.to_s=="notice" ? "success" : name %> radius">
+      <%= msg %>
+      <a href="#" class="close">&times;</a>
+    </div>
+<% end %>
+

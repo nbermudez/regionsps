@@ -48,7 +48,7 @@
 					- @goals.each do |goal|
 						= form_for(goal, url: admin_goal_path(goal), remote: true) do |f|
 							%tr
-								%td= Typestadistic.find(goal.typestadistic_id).name
+								%td= goal.typestadistic.name
 								- if goal.ableEditing==true
 									%td= f.text_field :total, :url=>{:action => :update}, :frequency => 0.05, :update=>goal, :with => :total
 								- else

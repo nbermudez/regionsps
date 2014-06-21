@@ -28,3 +28,5 @@ end
 gem 'jquery-rails'
 gem 'therubyracer'
 gem "haml-rails"
+
+gem 'will_paginate', '~> 3.0'

@@ -1,7 +1,7 @@
 class Admin::UsersController < AdminController
 	def index
 		if puede "Ver Usuario"
-			@users = User.all
+			@users = User.order(:first_name,:last_name)
 		else
 			redirect_to access_denied_path
 		end

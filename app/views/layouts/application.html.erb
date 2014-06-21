@@ -15,6 +15,10 @@
 <body>
 	<%= render 'layouts/header' %>
 
+    <div id='notice'>
+      <%= render 'shared/message' %>
+    </div>
+
 	<%= yield %>
 
 	<%= render 'layouts/footer' %>

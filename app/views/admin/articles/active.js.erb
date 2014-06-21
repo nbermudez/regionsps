@@ -1,0 +1,2 @@
+$("#notice").html("<%= escape_javascript( render 'shared/message').html_safe %>");
+$(".active_<%= @article.id %>").text("<%= @article.active ? "No Mostrar" : "Mostrar" %>");

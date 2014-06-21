@@ -23,7 +23,7 @@ class Admin::GoalsController < ApplicationController
 			end
 		end
 
-		@goals = Goal.where("year = ? and chapel_id = ?", @year, @chapel)
+		@goals = Goal.where("year = ? and chapel_id = ?", @year, @chapel).order(:created_at)
 		@sentStake = false
 
 		if @goals.first.sentToStake==true

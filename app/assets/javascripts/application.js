@@ -15,3 +15,9 @@
 //= require_tree ./bootstrap
 //= require_tree ./prettyPhoto
 //= require_tree ./js
+//=require_self
+
+
+$( document ).on( "click", "a.close", function() {
+    $(this).closest("div").fadeOut();
+});

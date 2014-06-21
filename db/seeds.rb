@@ -7,16 +7,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(:email=>"nestor.bermudez@unitec.edu", :first_name => "Nestor",
-	:last_name=>"Bermudez", :password => "you_wont_know_my_password", 
-	:password_confirmation => "you_wont_know_my_password", :phone => "Not available",
-	:stake => "NONE")
+Stake.create(:name =>"Staca")
 
-User.create!(:email=>"jared.ocampo@unitec.edu", :first_name => "Jared",
-	:last_name=>"Ocampo", :password => "you_wont_know_my_password", 
-	:password_confirmation => "you_wont_know_my_password", :phone => "Not available",
-	:stake => "San Pedro Sula")
+Chapel.create(:stake_id=>1, :address=>"somewhere", :name=>"capilla", :phone=>"3234")
 
+#User.create!(:email=>"nestor.bermudez@unitec.edu", :first_name => "Nestor",
+#	:last_name=>"Bermudez", :password => "you_wont_know_my_password",
+#	:password_confirmation => "you_wont_know_my_password", :phone => "Not available",
+#	:chapel_id =>1)
 
 Permission.create(:name => "Crear Usuario", :description => "No description available")
 Permission.create(:name => "Modificar Usuario", :description => "No description available")
@@ -61,7 +59,17 @@ Permission.create(:name => "Eliminar Categoria", :description => "No description
 Permission.create(:name => "Modificar Categoria", :description => "No description available")
 Permission.create(:name => "Crear Categoria", :description => "No description available")
 
-Role.create(:name => "Administrador")
+Permission.create(:name => "Crear Articulo", :description => "No description available")
+Permission.create(:name => "Modificar Articulo", :description => "No description available")
+Permission.create(:name => "Eliminar Articulo", :description => "No description available")
+Permission.create(:name => "Ver Articulo", :description => "No description available")
+
+Role.create(:name => "Administrador", :permissions => Permission.all  )
+
+User.create!(:email=>"olorenzo@outlook.com", :first_name => "Alex",
+             :last_name=>"Fernandez", :password => "Omar.123",
+             :password_confirmation => "Omar.123", :phone => "Not available",
+             :chapel_id =>1, :roles => Role.all)
 
 Group.create(:name => "Líderes de Estaca")
 Group.create(:name => "Secretarios")

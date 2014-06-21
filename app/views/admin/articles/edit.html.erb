@@ -1,0 +1,31 @@
+<div class="page-title">
+    <div class="row">
+        <div class="contact-form span3"></div>
+        <div class=" contact-us contact-form login-form span7">
+            <h2>Editar articulo</h2>
+            <%= form_for [:admin, @article], :html => {:multipart => true} do |f| %>
+
+              <div class="name">
+                <%= f.label :published, 'Publicar?', :class => 'nameLabel' %>
+                <%= f.check_box :published %>
+              </div>
+              <div class="name">
+                <%= f.label :active, 'Mostrar? (Si lo marca sera mostrado en el slider principal)', :class => 'nameLabel' %>
+                <%= f.check_box :active %>
+              </div>
+
+              <%= f.fields_for :resource do |r| %>
+                  <%= render "edit_resource_fields", :f => r %>
+              <% end %>
+                
+              <button type="submit" name="create">Actualizar articulo</button>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<div class="call-to-action-text ">
+    <div class="ca-button">
+        <a href="<%= admin_articles_path %>">Atrás</a>
+    </div>
+</div>

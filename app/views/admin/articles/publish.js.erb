@@ -1,0 +1,2 @@
+$("#notice").html("<%= escape_javascript( render 'shared/message').html_safe %>");
+$(".publish_<%= @article.id %>").text("<%= @article.published ? "Quitar Publicación" : "Publicar" %>");

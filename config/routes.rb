@@ -1,7 +1,15 @@
 Regionsps::Application.routes.draw do
 
   resources :events, :only => [:index]
+  resources :articles, :only => [:index], :path => 'articulos'
+  put 'admin/articulos/:id/active', to: 'admin/articles#active', :as => "admin_active_article"
+  put 'admin/articulos/:id/publish', to: 'admin/articles#publish', :as => "admin_publish_article"
+
   resources :sessions, :only => [:new, :create, :destroy]
+  get 'forgot_password'           => 'sessions#forgot_password'
+  post 'reset_password', to: 'sessions#reset_password_request', :as => "reset_password_request"
+  get 'reset_password', to: 'sessions#reset_password', :as => "reset_password"
+  post 'update_password', to: 'sessions#update_password', :as => "update_password"
   
   match '/recursos'              => 'resources#categories'
   match '/recursos/:id'          => 'resources#index', :as => :recursos_f
@@ -16,11 +24,11 @@ Regionsps::Application.routes.draw do
   match '/contact_us'            => 'contacts#new', :via => :get, :as => 'contacts'
   match '/contact_us'            => 'contacts#send_message'
   match '/message_sent'          => 'contacts#sent'
-
-  
+  match '/trips'            => 'events#trips', :via => :get, :as => 'trips'
 
   namespace :admin do
     resources :stadistics
+    resources :articles, :path => 'articulos'
     resources :goals
     resources :resources, :path => 'recursos' do
       resources :tags, :controller => "tags"
@@ -57,11 +65,11 @@ Regionsps::Application.routes.draw do
   end
 
 
-  match '/articulos/articulo1' => 'static_pages#articulo1', :as => :articulo1
-  match '/articulos/articulo2' => 'static_pages#articulo2', :as => :articulo2
-  match '/articulos/articulo3' => 'static_pages#articulo3', :as => :articulo3
-  match '/articulos/articulo4' => 'static_pages#articulo4', :as => :articulo4
-  match '/articulos/articulo5' => 'static_pages#articulo5', :as => :articulo5
+  #match '/articulos/articulo1' => 'static_pages#articulo1', :as => :articulo1
+  #match '/articulos/articulo2' => 'static_pages#articulo2', :as => :articulo2
+  #match '/articulos/articulo3' => 'static_pages#articulo3', :as => :articulo3
+  #match '/articulos/articulo4' => 'static_pages#articulo4', :as => :articulo4
+  # match '/articulos/articulo5' => 'static_pages#articulo5', :as => :articulo5
 
   match '/admin/roles/new' => 'admin/roles#new_empty', :via => :get
   match '/admin/roles/new' => 'admin/roles#create_empty', :via => :post
