@@ -6,12 +6,6 @@
     #
     # $ heroku config:add S3_KEY=your_s3_access_key S3_SECRET=your_s3_secret S3_REGION=eu-west-1 S3_ASSET_URL=http://assets.example.com/ S3_BUCKET_NAME=s3_bucket/folder
     
-    # S3_SECRET: EuuG+iJJM1jRn9ki2APqwaucmUDdKgIalLk0oWwo
-    # S3_KEY: AKIAIYHTSYTB5T2WGENA
-    # S3_REGION: us-west-2
-    # S3_BUCKET_NAME: regionsps_bucket/public
-    # S3_ASSET_URL: regionsps_bucket.s3-website-us-east-1.amazonaws.com
-    # Configuration for Amazon S3
 
     CarrierWave.configure do |config|
       if Rails.env.staging? || Rails.env.production?

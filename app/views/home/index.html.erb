@@ -35,7 +35,6 @@
                                     <a href="recursos"><i class="icon-folder-open"></i><br />Recursos</a>
                                 </li>
 
-                                <% unless current_user.nil? %>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="#"><i class="icon-calendar"></i><br />Eventos<b class="caret"></b></a>
                                       <ul class="dropdown-menu">
@@ -44,6 +43,7 @@
                                       </ul>
                                 </li>
 
+                                <% unless current_user.nil? %>
                                 <li>
                                     <a href="/dashboard"><i class="icon-inbox"></i><br />Dashboard</a>
                                 </li>
