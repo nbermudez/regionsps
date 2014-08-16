@@ -1,7 +1,7 @@
 class Admin::CategoriesController < AdminController
   def index
   	if puede "Ver Categoria"
-  		@cats = Category.order(:position)
+  		@cats = Category.all
   	else
   		redirect_to access_denied_path
   	end
@@ -29,13 +29,14 @@ class Admin::CategoriesController < AdminController
   	if puede "Modificar Categoria"
   		@cat = Category.find(params[:id])
 
-      is = TagCategorization.where(:category_id => @cat.id).order('tag_position ASC')
+      is = TagCategorization.where(:category_id => @cat.id)
       iss = [-1]
-      @topicos = []
+      
       is.each do |i|
         iss.push(i.tag_id)
-        @topicos.push(Tag.find (i.tag_id))
       end
+
+      @topicos = Tag.where("id in (?)", iss)
 
       @to_join = Tag.where("id not in (?)", iss)
   	else

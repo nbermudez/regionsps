@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
 	def categories
 		@current_page = "RECURSOS"
-		@categories = Category.where('name != (?)', "GENERAL").order('position asc')
+		@categories = Category.where('name != (?)', "GENERAL")
 	end
 
 	def index
