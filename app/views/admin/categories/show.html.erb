@@ -7,7 +7,7 @@ function display_edit(){
 		var_control = 2;
 	}else{
 		$('div[id="edit_category"]').each (function() {  this.style['display'] = 'none' });
-		$('a[id="edit_a"]').each (function() {  this.innerText = '[Cambiar nombre]' });
+		$('a[id="edit_a"]').each (function() {  this.innerText = '[Modificar Categoria]' });
 		var_control = 1;
 	}
 }
@@ -24,6 +24,8 @@ function display_edit(){
 					<tr>
 						<th scope="col">Tópico</th>
 						<th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -36,6 +38,16 @@ function display_edit(){
 							<%= link_to (image_tag('file_delete.png', :size =>'15x15')), admin_remove_tag_path(@cat.id, u.id), :method => :delete, :data => { :confirm => '¿Esta seguro?' }%>
 							<% end %>
 						</td>
+                        <td>
+                            <% if puede "Modificar Tag"%>
+                                <%= link_to raw('&#x25B2;'), admin_up_tag_path(@cat.id, u.id), :method => :put %>
+                            <% end %>
+                        </td>
+                        <td>
+                            <% if puede "Modificar Tag"%>
+                                <%= link_to raw('&#x25BC;'), admin_down_tag_path(@cat.id, u.id), :method => :post %>
+                            <% end %>
+                        </td>
 					</tr>
 					<% end %>
 				<% end %>
@@ -52,7 +64,7 @@ function display_edit(){
             	<h4 style="display: inline">Categoria: <%= @cat.name %></h4>
             	<% if puede("Modificar Categoria")%>
 				<a style="display: inline; vertical-align: top" id="edit_a" href="" onclick="display_edit();return false;">
-					[Cambiar nombre]
+					[Modificar Categoria]
 				</a>
 				<% end %>
             </div>
@@ -62,6 +74,11 @@ function display_edit(){
 				  <%= f.label :name, "Nuevo nombre" %>
 				  <%= f.text_field :name %>
 				</div>
+
+                <div class="field">
+                    <%= f.label :position, 'Posición (Orden)', :class => 'nameLabel' %>
+                    <%= f.number_field :position %>
+                </div>
 
 				<div class="actions">
 				    <button type="submit" name="create" style="width: 220px;">Actualizar categoria</button>

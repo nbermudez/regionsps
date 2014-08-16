@@ -1,5 +1,5 @@
 class TagCategorization < ActiveRecord::Base
-  attr_accessible :category_id, :tag_id
+  attr_accessible :id, :category_id, :tag_id, :tag_position
 
   def tags
   	tm = TagCategorization.where(:category_id => self.category_id)

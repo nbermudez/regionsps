@@ -35,24 +35,33 @@
                                     <a href="recursos"><i class="icon-folder-open"></i><br />Recursos</a>
                                 </li>
 
-                                <li>
-                                   <%= link_to '<i class="icon-folder-open"></i><br />Articulos'.html_safe, articles_path %>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="#"><i class="icon-calendar"></i><br />Eventos<b class="caret"></b></a>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="events" tabindex="-1">Actividades de la Region</a></li>
+                                        <li><a href="trips" tabindex="-1">Viajes al Templo</a></li>
+                                      </ul>
                                 </li>
-                                
+
                                 <% unless current_user.nil? %>
-                                <li>
-                                    <a href="events"><i class="icon-calendar"></i><br />Eventos</a>
-                                </li>
                                 <li>
                                     <a href="/dashboard"><i class="icon-inbox"></i><br />Dashboard</a>
                                 </li>
                                 <% end %>                                
                                 <li>
                                     <a href="nosotros"><i class="icon-fire"></i><br />Nosotros</a>
-                                </li>                                
-                                <li>
-                                    <a href="admin"><i class="icon-signin"></i><br />Administrar</a>
                                 </li>
+
+                              <li class="dropdown">
+                                <a class="dropdown-toggle" data-hover="dropdown" data-toggle="" href="admin"><i class="icon-signin"></i><br />Administrar<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                  <% if current_user.nil? %>
+                                      <li><%= link_to 'Login', signin_path,:tabindex=>"-1" %></li>
+                                  <% else %>
+                                     <li><%= link_to 'Logout', signout_path,:tabindex=>"-1", :method => :delete %></li>
+                                  <% end %>
+                                </ul>
+                              </li>
                             </ul>
                         </div>
                     </div>
@@ -83,40 +92,6 @@
       <div class="testimonials-title">
         <h3 style="width: 27%;"><%= link_to 'Articulos anteriores...', articles_path %><br><br></h3>
       </div>
-        <div class="testimonials-title">
-            <h3 style="width: 27%;">Actividades y Reuniones</h3>
-        </div>
-        <div class="row">
-            <div class="testimonial-list">
-                <% if @events.any? %>
-                <div class="tabbable tabs-below">
-                    <div class="tab-content">
-                        <% @events.each_with_index do |e, i|%>
-                        <div class="tab-pane <% if i == 0 %>active<%end %>" id="<%= e.id %>">                            
-                            <p style="padding-left: 10%">
-                                <strong><%= e.name %></strong>
-                                <br/>
-                                <%= e.description %>
-                                <br />
-                                <span class="violet">Lugar: </span><%= e.place %>
-                                <br />
-                                <span class="violet">Fecha y hora: </span><%= l e.celebrated_at, :format => :long %>
-                            </p>
-                        </div>
-                        <% end %>                  
-                    </div>
-
-                   <ul class="nav nav-tabs" style="width: 20%">
-                    <% @events.each_with_index do |e, i| %>
-                    <li class="<% if i == 0 %>active<% end %>"><a href="#<%= e.id%>" data-toggle="tab"></a></li>
-                    <% end %>
-                   </ul>
-               </div>
-               <% else %>
-                    <h4 style="margin-left: 41%;">No hay actividades próximas.</h4>
-               <% end %>
-            </div>
-        </div>
     </div>
 
     <footer>

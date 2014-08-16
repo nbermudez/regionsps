@@ -69,7 +69,7 @@ Role.create(:name => "Administrador", :permissions => Permission.all  )
 User.create!(:email=>"olorenzo@outlook.com", :first_name => "Alex",
              :last_name=>"Fernandez", :password => "Omar.123",
              :password_confirmation => "Omar.123", :phone => "Not available",
-             :chapel_id =>1, :roles => Role.all)
+             :chapel_id =>1, :roles => [Role.first])
 
 Group.create(:name => "Líderes de Estaca")
 Group.create(:name => "Secretarios")

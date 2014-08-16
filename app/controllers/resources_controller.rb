@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
 	def categories
 		@current_page = "RECURSOS"
-		@categories = Category.all
+		@categories = Category.where('name != (?)', "GENERAL").order('position asc')
 	end
 
 	def index
@@ -9,8 +9,14 @@ class ResourcesController < ApplicationController
 
 		@tags = Array.new
 		@category = params[:id]
-		tmp = TagCategorization.find_by_category_id(params[:id])
-		@tags = tmp.tags.order('id desc') unless tmp.nil?
+		tmp = TagCategorization.where('category_id = (?)', params[:id]).order(:tag_position)
+    unless(tmp.nil?)
+      @tags = []
+      tmp.each do |i|
+        @tags.push(Tag.find(i.tag_id))
+      end
+    end
+
 		@path_recursos = "Recursos/#{Category.find(params[:id]).name}"
 	end
 

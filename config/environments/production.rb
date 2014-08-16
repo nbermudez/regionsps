@@ -76,7 +76,9 @@ Regionsps::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.testing = false
+  config.testing = true
+
+  config.secret_token = '6f4abcdd3dbc2f7b33f47273b988f3ac198f7eec3a4e0b50816887110fcacf6298c896cc5d7fdab1b1f6e1b9a80cdae3ec72ebb9f3c60234eb6b93564f001fb1'
 
   config.stakes = ["San Pedro Sula", "Valle de Sula", "Merendón", "Fesitranh", 
     "Villanueva", "La Ceiba", "La Lima", "El Progreso",

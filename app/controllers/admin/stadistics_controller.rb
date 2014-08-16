@@ -185,7 +185,7 @@ class Admin::StadisticsController < ApplicationController
 			end
 		end
 
-		@stadistics = Stadistic.where("month = ? and year = ? and chapel_id = ?", @month, @year, @chapel.id).order.reverse
+		@stadistics = Stadistic.where("month = ? and year = ? and chapel_id = ?", @month, @year, @chapel.id).order("id ASC")
 	end
 
 	def lastyears

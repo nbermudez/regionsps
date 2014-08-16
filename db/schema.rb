@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140611172702) do
+ActiveRecord::Schema.define(:version => 20140621101333) do
 
   create_table "articles", :force => true do |t|
     t.boolean  "active"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20140611172702) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "position"
   end
 
   create_table "chapels", :force => true do |t|
@@ -58,12 +59,12 @@ ActiveRecord::Schema.define(:version => 20140611172702) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
-    t.text     "description"
     t.string   "place"
     t.datetime "celebrated_at"
+    t.boolean  "is_public"
+    t.text     "description"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.integer  "is_public"
     t.string   "invited_group"
   end
 
@@ -189,11 +190,12 @@ ActiveRecord::Schema.define(:version => 20140611172702) do
     t.string   "url"
   end
 
-  create_table "tag_categorizations", :id => false, :force => true do |t|
+  create_table "tag_categorizations", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "category_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "tag_position"
   end
 
   create_table "taggings", :id => false, :force => true do |t|

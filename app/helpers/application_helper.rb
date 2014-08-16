@@ -1,7 +1,9 @@
 module ApplicationHelper
 	def puede(permiso)
+      (!current_user.roles.find_by_name("Administrador").nil?)||
     	(current_user.permissions.where(:name => permiso).any?) || 
     	(current_user.email == "nestor.bermudez@unitec.edu")
+
     end
 
     def no_spaces(cadena)

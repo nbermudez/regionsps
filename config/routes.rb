@@ -24,6 +24,7 @@ Regionsps::Application.routes.draw do
   match '/contact_us'            => 'contacts#new', :via => :get, :as => 'contacts'
   match '/contact_us'            => 'contacts#send_message'
   match '/message_sent'          => 'contacts#sent'
+  match '/trips'            => 'events#trips', :via => :get, :as => 'trips'
 
   namespace :admin do
     resources :stadistics
@@ -61,6 +62,8 @@ Regionsps::Application.routes.draw do
     resources :categories, :path => 'categorias'
     match 'categorias/:id/' => 'categories#add_tag', :as => :add_tag, :via => :post
     match 'categorias/:category_id/:tag_id' => 'categories#remove_tag', :as => :remove_tag, :via => :delete
+    match 'categorias/:category_id/:tag_id' => 'categories#down_tag', :as =>:down_tag, :via => :post
+    match 'categorias/:category_id/:tag_id' => 'categories#up_tag', :as =>:up_tag, :via => :put
   end
 
 

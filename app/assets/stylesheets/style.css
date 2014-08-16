@@ -26,6 +26,10 @@ body {
     background-color: #e6e6e6;
 }
 
+.admin-articles-text-align{
+    text-align: left;
+}
+
 .alert-box.success {
     background-color: #43AC6A;
     border-color: #3A945B;

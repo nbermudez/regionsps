@@ -15,3 +15,13 @@
 
   <%= will_paginate @articles %>
 </div>
+
+
+<div class="call-to-action-text ">
+
+  <% if puede "Crear Articulo" %>
+      <div class="ca-button">
+        <a href="<%= new_admin_article_path %>">Nuevo articulo</a>
+      </div>
+  <% end %>
+</div>

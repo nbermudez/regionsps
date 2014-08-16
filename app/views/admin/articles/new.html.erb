@@ -2,7 +2,7 @@
     <div class="row">
         <div class="contact-form span3"></div>
         <div class=" contact-us contact-form login-form span7">
-            <h2>Nuevo recurso</h2>
+            <h2>Nuevo Articulo</h2>
             <%= form_for [:admin, @article], :html => {:multipart => true} do |f| %>
 
               <div class="name">
@@ -26,6 +26,6 @@
 
 <div class="call-to-action-text ">
     <div class="ca-button">
-        <a href="<%= admin_resources_path %>">Atrás</a>
+        <a href="<%= admin_articles_path %>">Atrás</a>
     </div>
 </div>

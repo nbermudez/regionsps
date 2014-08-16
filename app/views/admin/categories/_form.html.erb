@@ -14,6 +14,11 @@
     <%= f.text_field :name %>
   </div>
 
+    <div class="field">
+        <%= f.label :position, 'Posición (Orden)', :class => 'nameLabel' %>
+        <%= f.number_field :position, :placeholder => 'Si no se especifica se usará un número auto incremental...' %>
+    </div>
+
   <div class="actions">
     <% if @cat.new_record? %>
       <button type="submit" name="create" style="width: 220px;">Crear categoria</button>

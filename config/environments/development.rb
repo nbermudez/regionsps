@@ -45,10 +45,13 @@ Regionsps::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  config.secret_token= "b25498768ac511556c536a1cb01d2376"
 
   config.stakes = ["San Pedro Sula", "Valle de Sula", "Merendón", "Fesitranh", 
     "Villanueva", "La Ceiba", "La Lima", "El Progreso",
      "Santa Rosa", "Olanchito", "Satélite"]
 
   config.aws_access_key_id = 'AKIAIYHTSYTB5T2WGENA'
+
+  config.secret_token = '6f4abcdd3dbc2f7b33f47273b988f3ac198f7eec3a4e0b50816887110fcacf6298c896cc5d7fdab1b1f6e1b9a80cdae3ec72ebb9f3c60234eb6b93564f001fb1'
 end

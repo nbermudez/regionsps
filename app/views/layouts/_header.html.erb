@@ -29,24 +29,17 @@
                                 </li>
                                 <li>
 
-                              <li
-                              <% if @current_page == "ARTICULOS" %>
-                              class="current-page"
-                              <%end %>
-                              >
-                              <%= link_to '<i class="icon-folder-open"></i><br />Articulos'.html_safe, articles_path %>
-
-                              </li>
                               <li>
                                 
                                 <li
-                                <% if @current_page == "EVENTOS" %>
-                                    class="current-page"
-                                <%end %>
-                                >
-                                    <a href="/calendar"><i class="icon-calendar"></i><br />Eventos</a>
+                                class="dropdown" >
+                                  <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="#"><i class="icon-calendar"></i><br />Eventos<b class="caret"></b></a>
+                                  <ul class="dropdown-menu">
+                                    <li><a href="events" tabindex="-1">Actividades de la Region</a></li>
+                                    <li><a href="trips" tabindex="-1">Viajes al Templo</a></li>
+                                  </ul>
                                 </li>
-                                
+
                                 <% unless current_user.nil? %>
                                 <li
                                 <% if @current_page == "DASHBOARD" %>
@@ -64,12 +57,13 @@
                                     <a href="/nosotros"><i class="icon-fire"></i><br />Nosotros</a>
                                 </li>                                
                                 <li
-                                <% if @current_page == "ADMIN" %>
-                                    class="current-page"
-                                <%end %>
-                                >
-                                    <a href="/admin"><i class="icon-signin"></i><br />Administrar</a>
+                                class="dropdown" >
+                                  <a class="dropdown-toggle" data-hover="dropdown" data-toggle="" href="admin"><i class="icon-signin"></i><br />Administrar<b class="caret"></b></a>
+                                  <ul class="dropdown-menu">
+                                    <li><%= link_to 'Logout', signout_path,:tabindex=>"-1", :method => :delete %></li>
+                                  </ul>
                                 </li>
+
                                 
                             </ul>
                         </div>
