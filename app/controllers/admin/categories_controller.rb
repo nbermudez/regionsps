@@ -31,12 +31,10 @@ class Admin::CategoriesController < AdminController
 
       is = TagCategorization.where(:category_id => @cat.id).order('tag_position ASC')
       iss = [-1]
-      @topicos = []
       is.each do |i|
         iss.push(i.tag_id)
-        @topicos.push(Tag.find (i.tag_id))
       end
-
+      @topicos = Tag.where("id in (?)", iss)
       @to_join = Tag.where("id not in (?)", iss)
   	else
   		redirect_to access_denied_path
